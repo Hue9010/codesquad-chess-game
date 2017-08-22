@@ -6,25 +6,22 @@ import org.junit.Test;
 
 public class PawnTest {
 	
-	final static String WHITE = "white";
-	final static String BLACK = "black";
-
 	@Test
+    public void create_기본생성자() throws Exception {
+        Pawn pawn = new Pawn();
+        assertEquals(Pawn.WHITE_COLOR, pawn.getColor());
+        assertEquals(Pawn.WHITE_REPRESENTATION, pawn.getRepresentation());
+    }
+
+    @Test
     public void create() {
-        verifyPawn(WHITE);
-        verifyPawn(BLACK);
+        verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        verifyPawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
     }
 
-	@Test
-	public void create_기본생성자() {
-		Pawn pawn = new Pawn();
-        assertEquals(WHITE, pawn.getColor());
-	}
-	
-    void verifyPawn(final String color) {
-        Pawn pawn = new Pawn(color);
+    void verifyPawn(final String color, final char representation) {
+        Pawn pawn = new Pawn(color, representation);
         assertEquals(color, pawn.getColor());
+        assertEquals(representation, pawn.getRepresentation());
     }
-    
-    
 }

@@ -6,25 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pieces.Pawn;
+import utils.StringUtils;
+
+import static utils.StringUtils.*;
 
 public class BoardTest {
 	Board board;
 	Pawn white;
 	Pawn black;
-	// @Test
-	// public void create() throws Exception {
-	// Board board = new Board();
-	//
-	// Pawn white = new Pawn(Pawn.WHITE_COLOR);
-	// board.add(white);
-	// assertEquals(1, board.size());
-	// assertEquals(white, board.findPawn(0));
-	//
-	// Pawn black = new Pawn(Pawn.BLACK_COLOR);
-	// board.add(black);
-	// assertEquals(2, board.size());
-	// assertEquals(black, board.findPawn(1));
-	// }
 
 	@Before
 	public void setUp() {
@@ -32,20 +21,31 @@ public class BoardTest {
 	}
 
 	@Test
+	public void create() throws Exception {
+		Pawn white = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+		board.addWhitePawn(white);
+		assertEquals(1, board.size());
+		assertEquals(white, board.findWhitePawn(0));
+
+		Pawn black = new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
+		board.addBlackPawn(black);
+		assertEquals(2, board.size());
+		assertEquals(black, board.findBlackPawn(0));
+	}
+
+	@Test
 	public void initialize() throws Exception {
-		Pawn white = new Pawn(Pawn.WHITE_COLOR);
-		for (int i = 0; i < 8; i++) {
-			white = new Pawn(Pawn.WHITE_COLOR);
-			black = new Pawn(Pawn.BLACK_COLOR);
-			board.add(white);
-			board.add(black);
-		}
-		assertEquals(16,board.size());
+		board = new Board();
+		board.initialize();
+		assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+		assertEquals("pppppppp", board.getWhitePawnsResult());
 	}
 
 	@Test
 	public void print() throws Exception {
-
+		board = new Board();
+		board.initialize();
+		board.print();
+		System.out.println(StringUtils.appendNewLine("3333"));
 	}
-
 }
