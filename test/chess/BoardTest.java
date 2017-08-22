@@ -5,47 +5,25 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import pieces.Pawn;
+import pieces.Piece;
 import utils.StringUtils;
 
 import static utils.StringUtils.*;
 
 public class BoardTest {
-	Board board;
-	Pawn white;
-	Pawn black;
+	private Board board;
 
 	@Before
-	public void setUp() {
+	public void setup() {
 		board = new Board();
 	}
 
 	@Test
 	public void create() throws Exception {
-		Pawn white = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
-		board.addWhitePawn(white);
-		assertEquals(1, board.size());
-		assertEquals(white, board.findWhitePawn(0));
-
-		Pawn black = new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
-		board.addBlackPawn(black);
-		assertEquals(2, board.size());
-		assertEquals(black, board.findBlackPawn(0));
-	}
-
-	@Test
-	public void initialize() throws Exception {
-		board = new Board();
 		board.initialize();
-		assertEquals("PPPPPPPP", board.getBlackPawnsResult());
-		assertEquals("pppppppp", board.getWhitePawnsResult());
-	}
-
-	@Test
-	public void print() throws Exception {
-		board = new Board();
-		board.initialize();
-		board.print();
-		System.out.println(StringUtils.appendNewLine("3333"));
+		assertEquals(32, board.pieceCount());
+		String blankRank = appendNewLine("........");
+		assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
+				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
 	}
 }
