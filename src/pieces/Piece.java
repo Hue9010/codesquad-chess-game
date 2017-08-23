@@ -2,6 +2,28 @@ package pieces;
 
 public class Piece {
 
+	public enum Color {
+		WHITE, BLACK, NOCOLOR;
+	}
+
+	public enum Type {
+		PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+
+		private char representation;
+
+		Type(char representation) {
+			this.representation = representation;
+		}
+
+		public char getWhiteRepresentation() {
+			return representation;
+		}
+
+		public char getBlackRepresentation() {
+			return Character.toUpperCase(representation);
+		}
+	}
+
 	private Color color;
 	Type representation;
 
@@ -70,10 +92,6 @@ public class Piece {
 		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
 	}
 
-	public enum Color {
-		WHITE, BLACK, NOCOLOR;
-	}
-
 	public boolean isWhite() {
 		return color == Color.WHITE;
 	}
@@ -91,25 +109,7 @@ public class Piece {
 	}
 
 	public char getRepresentation() {
-		return representation.getWhiteRepresentation();
-	}
-
-	public enum Type {
-		PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
-
-		private char representation;
-
-		Type(char representation) {
-			this.representation = representation;
-		}
-
-		public char getWhiteRepresentation() {
-			return representation;
-		}
-
-		public char getBlackRepresentation() {
-			return Character.toUpperCase(representation);
-		}
+		return color == Color.WHITE ? representation.getWhiteRepresentation() : representation.getBlackRepresentation();
 	}
 
 }
