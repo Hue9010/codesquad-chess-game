@@ -1,3 +1,4 @@
+
 package pieces;
 
 public class Piece {
@@ -25,71 +26,73 @@ public class Piece {
 	}
 
 	private Color color;
-	Type representation;
+	private Type representation;
+	private Position position;
 
-	private Piece(Color color, Type representation) {
+	private Piece(Color color, Type representation, Position position) {
 		this.color = color;
 		this.representation = representation;
+		this.position = position;
 	}
 
-	private static Piece creatWhite(Type representation) {
-		return new Piece(Color.WHITE, representation);
+	private static Piece creatWhite(Type representation, Position position) {
+		return new Piece(Color.WHITE, representation, position);
 	}
 
-	private static Piece creatBlack(Type representation) {
-		return new Piece(Color.BLACK, representation);
+	private static Piece creatBlack(Type representation, Position position) {
+		return new Piece(Color.BLACK, representation, position);
 	}
 
-	public static Piece createWhitePawn() {
-		return creatWhite(Type.PAWN);
+	public static Piece createWhitePawn(Position position) {
+		return creatWhite(Type.PAWN, position);
 	}
 
-	public static Piece createBlackPawn() {
-		return creatBlack(Type.PAWN);
+	public static Piece createBlackPawn(Position position) {
+		return creatBlack(Type.PAWN, position);
 	}
 
-	public static Piece createWhiteKnight() {
-		return creatWhite(Type.KNIGHT);
+	public static Piece createWhiteKnight(Position position) {
+		return creatWhite(Type.KNIGHT, position);
 	}
 
-	public static Piece createBlackKnight() {
-		return creatBlack(Type.KNIGHT);
+	public static Piece createBlackKnight(Position position) {
+		return creatBlack(Type.KNIGHT, position);
 	}
 
-	public static Piece createWhiteRook() {
-		return creatWhite(Type.ROOK);
+	public static Piece createWhiteRook(Position position) {
+		return creatWhite(Type.ROOK, position);
 	}
 
-	public static Piece createBlackRook() {
-		return creatBlack(Type.ROOK);
+	public static Piece createBlackRook(Position position) {
+		return creatBlack(Type.ROOK, position);
 	}
 
-	public static Piece createWhiteBishop() {
-		return creatWhite(Type.BISHOP);
+	public static Piece createWhiteBishop(Position position) {
+		return creatWhite(Type.BISHOP, position);
 	}
 
-	public static Piece createBlackBishop() {
-		return creatBlack(Type.BISHOP);
+	public static Piece createBlackBishop(Position position) {
+		return creatBlack(Type.BISHOP, position);
 	}
 
-	public static Piece createWhiteQueen() {
-		return creatWhite(Type.QUEEN);
+	public static Piece createWhiteQueen(Position position) {
+		return creatWhite(Type.QUEEN, position);
 	}
 
-	public static Piece createBlackQueen() {
-		return creatBlack(Type.QUEEN);
+	public static Piece createBlackQueen(Position position) {
+		return creatBlack(Type.QUEEN, position);
 	}
 
-	public static Piece createWhiteKing() {
-		return creatWhite(Type.KING);
+	public static Piece createWhiteKing(Position position) {
+		return creatWhite(Type.KING, position);
 	}
 
-	public static Piece createBlackKing() {
-		return creatBlack(Type.KING);
+	public static Piece createBlackKing(Position position) {
+		return creatBlack(Type.KING, position);
 	}
 
-	public static Piece createBlank() {
-		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+	public static Piece createBlank(Position position) {
+		return new Piece(Color.NOCOLOR, Type.NO_PIECE, position);
 	}
 
 	public boolean isWhite() {
@@ -111,5 +114,38 @@ public class Piece {
 	public char getRepresentation() {
 		return color == Color.WHITE ? representation.getWhiteRepresentation() : representation.getBlackRepresentation();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((representation == null) ? 0 : representation.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piece other = (Piece) obj;
+		if (color != other.color)
+			return false;
+		if (position == null) {
+			if (other.position != null)
+				return false;
+		} else if (!position.equals(other.position))
+			return false;
+		if (representation != other.representation)
+			return false;
+		return true;
+	}
+	
+	
 
 }

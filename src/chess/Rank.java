@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pieces.Piece;
+import pieces.Piece.Color;
+import pieces.Piece.Type;
+import pieces.Position;
 
 public class Rank {
 
@@ -17,86 +20,68 @@ public class Rank {
 		return pieces;
 	}
 
-	public static Rank initializeWhitePieces() {
+	public static Rank initializeWhitePieces(int index) {
 		Rank rank = new Rank();
-		rank.pieceAdd(Piece.createWhiteRook());
-		rank.pieceAdd(Piece.createWhiteKnight());
-		rank.pieceAdd(Piece.createWhiteBishop());
-		rank.pieceAdd(Piece.createWhiteQueen());
-		rank.pieceAdd(Piece.createWhiteKing());
-		rank.pieceAdd(Piece.createWhiteBishop());
-		rank.pieceAdd(Piece.createWhiteKnight());
-		rank.pieceAdd(Piece.createWhiteRook());
+		rank.pieceAdd(Piece.createWhiteRook(new Position(0,index)));
+		rank.pieceAdd(Piece.createWhiteKnight(new Position(1,index)));
+		rank.pieceAdd(Piece.createWhiteBishop(new Position(2,index)));
+		rank.pieceAdd(Piece.createWhiteQueen(new Position(3,index)));
+		rank.pieceAdd(Piece.createWhiteKing(new Position(4,index)));
+		rank.pieceAdd(Piece.createWhiteBishop(new Position(5,index)));
+		rank.pieceAdd(Piece.createWhiteKnight(new Position(6,index)));
+		rank.pieceAdd(Piece.createWhiteRook(new Position(7,index)));
 		return rank;
 	}
 
-	public static Rank initializeBlackPieces() {
+	public static Rank initializeBlackPieces(int index) {
 		Rank rank = new Rank();
-		rank.pieceAdd(Piece.createBlackRook());
-		rank.pieceAdd(Piece.createBlackKnight());
-		rank.pieceAdd(Piece.createBlackBishop());
-		rank.pieceAdd(Piece.createBlackQueen());
-		rank.pieceAdd(Piece.createBlackKing());
-		rank.pieceAdd(Piece.createBlackBishop());
-		rank.pieceAdd(Piece.createBlackKnight());
-		rank.pieceAdd(Piece.createBlackRook());
+		rank.pieceAdd(Piece.createBlackRook(new Position(0,index)));
+		rank.pieceAdd(Piece.createBlackKnight(new Position(1,index)));
+		rank.pieceAdd(Piece.createBlackBishop(new Position(2,index)));
+		rank.pieceAdd(Piece.createBlackQueen(new Position(3,index)));
+		rank.pieceAdd(Piece.createBlackKing(new Position(4,index)));
+		rank.pieceAdd(Piece.createBlackBishop(new Position(5,index)));
+		rank.pieceAdd(Piece.createBlackKnight(new Position(6,index)));
+		rank.pieceAdd(Piece.createBlackRook(new Position(7,index)));
 		return rank;
 	}
 
-	public static Rank initializeWhitePawns() {
+	public static Rank initializeWhitePawns(int index) {
 		Rank rank = new Rank();
-		for (int i = 0; i < 8; i++) {
-			rank.pieceAdd(Piece.createWhitePawn());
+		for (int x = 0; x < 8; x++) {
+			rank.pieceAdd(Piece.createWhitePawn(new Position(x,index)));
 		}
 		return rank;
 	}
 
-	public static Rank initializeBlackPawns() {
+	public static Rank initializeBlackPawns(int index) {
 		Rank rank = new Rank();
-		for (int i = 0; i < 8; i++) {
-			rank.pieceAdd(Piece.createBlackPawn());
+		for (int x = 0; x < 8; x++) {
+			rank.pieceAdd(Piece.createBlackPawn(new Position(x,index)));
 		}
 		return rank;
 	}
 
-	public static Rank initializeBlank() {
+	public static Rank initializeBlank(int index) {
 		Rank rank = new Rank();
-		for (int i = 0; i < 8; i++) {
-			rank.pieceAdd(Piece.createBlank());
+		for (int x = 0; x < 8; x++) {
+			rank.pieceAdd(Piece.createBlank(new Position(x,index)));
 		}
 		return rank;
 	}
-
-	// public void addWhitePawn(Piece pawn) {
-	// whitePawns.add(pawn);
-	// }
-	//
-	// public void addBlackPawn(Piece pawn) {
-	// blackPawns.add(pawn);
-	// }
-	//
-	// public int size() {
-	// return whitePawns.size() + blackPawns.size();
-	// }
-
-	// public String getWhitePawnsResult() {
-	// return getPieceResult(whitePawns);
-	// }
-	//
-	// public String getBlackPawnsResult() {
-	// return getPieceResult(blackPawns);
-	// }
-	//
-	// private String getWhitePiecesResult() {
-	// return getPieceResult(whitePieces);
-	// }
-	//
-	// private String getBlackPiecesResult() {
-	// return getPieceResult(blackPieces);
-	// }
-	//
-	// private String getBlankRankResult() {
-	// return getPieceResult(blackPieces);
-	// }
+	
+	public int pieceCount(Color color,Type type) {
+		int count = 0;
+		for (Piece piece : pieces) {
+			if(piece.getColor() == color && piece.getType() == type) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public Piece findPiece(int xPos) {
+		return pieces.get(xPos);
+	}
 
 }
