@@ -12,6 +12,19 @@ import static utils.StringUtils.*;
 
 public class Board {
 	private List<Rank> ranks = new ArrayList<Rank>();
+	
+	public void initializeEmpty() {
+
+		ranks.add(Rank.initializeBlank(1));
+		ranks.add(Rank.initializeBlank(2));
+		ranks.add(Rank.initializeBlank(3));
+		ranks.add(Rank.initializeBlank(4));
+		ranks.add(Rank.initializeBlank(5));
+		ranks.add(Rank.initializeBlank(6));
+		ranks.add(Rank.initializeBlank(7));
+		ranks.add(Rank.initializeBlank(8));
+
+	}
 
 	public void initialize() {
 		ranks.add(Rank.initializeWhitePieces(0));
@@ -51,9 +64,16 @@ public class Board {
 		return sb.toString();
 	}
 
-	public Piece findPiece(String string) {
-		Position position = new Position(string);
-		return ranks.get(position.getYIndex()).findPiece(position.getXIndex());
+	public Piece findPiece(String position) {
+		Position p = new Position(position);
+		return ranks.get(p.getYIndex()).findPiece(p.getXIndex());
 	}
+
+	public void move(String position, Piece piece) {
+		Position p = new Position(position);
+		ranks.get(p.getYIndex()).move(p.getXIndex(),piece);
+	}
+
+	
 
 }
