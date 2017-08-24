@@ -8,14 +8,21 @@ public class Piece {
 	}
 
 	public enum Type {
-		PAWN('p'), ROOK('r'), KNIGHT('n'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('.');
+		PAWN('p',1.0), ROOK('r',5.0), KNIGHT('n',2.5), BISHOP('b',3.0), QUEEN('q',9.0), 
+		KING('k',0.0), NO_PIECE('.',0.0);
 
 		private char representation;
+		private double point;
 
-		Type(char representation) {
+		Type(char representation,double point) {
 			this.representation = representation;
+			this.point = point;
 		}
 
+		public double getPoint() {
+		      return point;
+		  }
+		
 		public char getWhiteRepresentation() {
 			return representation;
 		}
@@ -26,13 +33,20 @@ public class Piece {
 	}
 
 	private Color color;
-	private Type representation;
+	private Type type;
 	private Position position;
 
 	private Piece(Color color, Type representation, Position position) {
 		this.color = color;
-		this.representation = representation;
+		this.type = representation;
 		this.position = position;
+	}
+	
+	public double getPoint(Color color) {
+		if(this.color == color) {
+			return type.getPoint();
+		}
+		return 0;
 	}
 
 	private static Piece creatWhite(Type representation, Position position) {
@@ -104,7 +118,7 @@ public class Piece {
 	}
 
 	public Type getType() {
-		return representation;
+		return type;
 	}
 
 	public Color getColor() {
@@ -112,7 +126,7 @@ public class Piece {
 	}
 
 	public char getRepresentation() {
-		return color == Color.WHITE ? representation.getWhiteRepresentation() : representation.getBlackRepresentation();
+		return color == Color.WHITE ? type.getWhiteRepresentation() : type.getBlackRepresentation();
 	}
 
 	@Override
@@ -121,7 +135,7 @@ public class Piece {
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + ((representation == null) ? 0 : representation.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -141,11 +155,9 @@ public class Piece {
 				return false;
 		} else if (!position.equals(other.position))
 			return false;
-		if (representation != other.representation)
+		if (type != other.type)
 			return false;
 		return true;
 	}
 	
-	
-
 }

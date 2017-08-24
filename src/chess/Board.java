@@ -74,6 +74,14 @@ public class Board {
 		ranks.get(p.getYIndex()).move(p.getXIndex(),piece);
 	}
 
+	public double caculcatePoint(Color color) {
+		double point = 0;
+		for (Rank rank : ranks) {
+			point += rank.caculcatePoint(color);
+		}
+		return point;
+	}
+
 	
 
 }
