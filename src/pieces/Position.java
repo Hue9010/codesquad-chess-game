@@ -1,8 +1,12 @@
 package pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Position {
 	private int x;
 	private int y;
+	private static final int RANKSIZE = 8;
 
 	public Position(String position) {
 		x = position.charAt(0) - 'a' + 1;
@@ -20,6 +24,24 @@ public class Position {
 
 	public int getYIndex() {
 		return y - 1;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public List<Position> SameYPosition() {
+		List<Position> positions = new ArrayList<>();
+		for (int yPos = 1; yPos <= RANKSIZE; yPos++) {
+			if (yPos != getY()) {
+				positions.add(new Position(getXIndex(), yPos - 1));
+			}
+		}
+		return positions;
 	}
 
 	@Override

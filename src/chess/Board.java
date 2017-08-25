@@ -12,7 +12,7 @@ import static utils.StringUtils.*;
 
 public class Board {
 	private List<Rank> ranks = new ArrayList<Rank>();
-	
+
 	public void initializeEmpty() {
 
 		ranks.add(Rank.initializeBlank(1));
@@ -71,17 +71,29 @@ public class Board {
 
 	public void move(String position, Piece piece) {
 		Position p = new Position(position);
-		ranks.get(p.getYIndex()).move(p.getXIndex(),piece);
+		ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
 	}
 
 	public double caculcatePoint(Color color) {
+		List<Piece> pieces = findPieceByColor(color);
 		double point = 0;
-		for (Rank rank : ranks) {
-			point += rank.caculcatePoint(color);
+		for (Piece piece : pieces) {
+			point += piece.getPoint(pieces);
 		}
+
+		// double point = 0;
+		// for (Rank rank : ranks) {
+		// point += rank.caculcatePoint(color);
+		// }
 		return point;
 	}
 
-	
+	private List<Piece> findPieceByColor(Color color) {
+		ArrayList<Piece> pieces = new ArrayList<>();
+		for (Rank rank : ranks) {
+			pieces.addAll(rank.findPieceByColor(color));
+		}
+		return pieces;
+	}
 
 }

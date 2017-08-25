@@ -1,6 +1,8 @@
 
 package pieces;
 
+import java.util.List;
+
 public class Piece {
 
 	public enum Color {
@@ -8,21 +10,21 @@ public class Piece {
 	}
 
 	public enum Type {
-		PAWN('p',1.0), ROOK('r',5.0), KNIGHT('n',2.5), BISHOP('b',3.0), QUEEN('q',9.0), 
-		KING('k',0.0), NO_PIECE('.',0.0);
+		PAWN('p', 1.0), ROOK('r', 5.0), KNIGHT('n', 2.5), BISHOP('b', 3.0), QUEEN('q', 9.0), KING('k',
+				0.0), NO_PIECE('.', 0.0);
 
 		private char representation;
 		private double point;
 
-		Type(char representation,double point) {
+		Type(char representation, double point) {
 			this.representation = representation;
 			this.point = point;
 		}
 
 		public double getPoint() {
-		      return point;
-		  }
-		
+			return point;
+		}
+
 		public char getWhiteRepresentation() {
 			return representation;
 		}
@@ -41,12 +43,18 @@ public class Piece {
 		this.type = representation;
 		this.position = position;
 	}
-	
-	public double getPoint(Color color) {
-		if(this.color == color) {
+
+	public double getPoint(List<Piece> pieces) {
+		if (this.type != Type.PAWN) {
 			return type.getPoint();
 		}
-		return 0;
+		System.out.println();
+		for (Position pos : this.position.SameYPosition()) {
+			if (pieces.contains(new Piece(this.color, this.type, pos))) {
+				return type.getPoint() - 0.5;
+			}
+		}
+		return type.point;
 	}
 
 	private static Piece creatWhite(Type representation, Position position) {
@@ -159,5 +167,11 @@ public class Piece {
 			return false;
 		return true;
 	}
-	
+
+	public void addPiecesByColor(Color color, List<Piece> piecesByColor) {
+		if (this.color == color) {
+			piecesByColor.add(this);
+		}
+	}
+
 }
