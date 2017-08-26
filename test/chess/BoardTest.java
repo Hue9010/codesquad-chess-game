@@ -12,9 +12,6 @@ import pieces.Position;
 
 import static utils.StringUtils.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BoardTest {
 	private Board board;
 
