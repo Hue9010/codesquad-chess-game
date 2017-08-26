@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pieces.Piece;
@@ -15,6 +16,7 @@ public class Board {
 
 	public void initializeEmpty() {
 
+		ranks.add(Rank.initializeBlank(0));
 		ranks.add(Rank.initializeBlank(1));
 		ranks.add(Rank.initializeBlank(2));
 		ranks.add(Rank.initializeBlank(3));
@@ -22,7 +24,6 @@ public class Board {
 		ranks.add(Rank.initializeBlank(5));
 		ranks.add(Rank.initializeBlank(6));
 		ranks.add(Rank.initializeBlank(7));
-		ranks.add(Rank.initializeBlank(8));
 
 	}
 
@@ -80,11 +81,6 @@ public class Board {
 		for (Piece piece : pieces) {
 			point += piece.getPoint(pieces);
 		}
-
-		// double point = 0;
-		// for (Rank rank : ranks) {
-		// point += rank.caculcatePoint(color);
-		// }
 		return point;
 	}
 
@@ -94,6 +90,23 @@ public class Board {
 			pieces.addAll(rank.findPieceByColor(color));
 		}
 		return pieces;
+	}
+
+	public int countPieceByColorAndType(Color color, Type type) {
+		int countOfPiece = 0;
+		for (Rank rank : ranks) {
+			countOfPiece += rank.countPieceByColorAndType(color, type);
+		}
+		return countOfPiece;
+	}
+
+	public List<Piece> sortByPointOfColor(Color color) {
+		List<Piece> pieces = findPieceByColor(color);
+		Collections.sort(pieces);
+		for (Piece piece : pieces) {
+			System.out.print(" " + piece.getRepresentation());
+		}
+		return null;
 	}
 
 }

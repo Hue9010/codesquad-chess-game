@@ -88,21 +88,21 @@ public class Rank {
 		pieces.set(xPos, piece);
 	}
 
-//	public double caculcatePoint(Color color) {
-//		double point = 0;
-//		double checkPoint = 0;
-//		double countPawn = 0;
-//		for (Piece piece : pieces) {
-//			checkPoint = piece.getPoint(color);
-//			System.out.println(point);
-//			if (checkPoint == 1.0) {
-//				countPawn++;
-//			}
-//			point += checkPoint;
-//			// point += piece.getPoint(color);
-//		}
-//		return countPawn < 2 ? point : point - (countPawn * 0.5);
-//	}
+	// public double caculcatePoint(Color color) {
+	// double point = 0;
+	// double checkPoint = 0;
+	// double countPawn = 0;
+	// for (Piece piece : pieces) {
+	// checkPoint = piece.getPoint(color);
+	// System.out.println(point);
+	// if (checkPoint == 1.0) {
+	// countPawn++;
+	// }
+	// point += checkPoint;
+	// // point += piece.getPoint(color);
+	// }
+	// return countPawn < 2 ? point : point - (countPawn * 0.5);
+	// }
 
 	public List<Piece> findPieceByColor(Color color) {
 		List<Piece> piecesByColor = new ArrayList<>();
@@ -110,6 +110,16 @@ public class Rank {
 			piece.addPiecesByColor(color, piecesByColor);
 		}
 		return piecesByColor;
+	}
+
+	public int countPieceByColorAndType(Color color, Type type) {
+		int countOfPiece = 0;
+		for (Piece piece : pieces) {
+			if(piece.checkColorType(color,type)) {
+				countOfPiece++;
+			}
+		}
+		return countOfPiece;
 	}
 
 }

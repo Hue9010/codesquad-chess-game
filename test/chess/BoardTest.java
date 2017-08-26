@@ -7,9 +7,13 @@ import org.junit.Test;
 
 import pieces.Piece;
 import pieces.Piece.Color;
+import pieces.Piece.Type;
 import pieces.Position;
 
 import static utils.StringUtils.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardTest {
 	private Board board;
@@ -32,15 +36,6 @@ public class BoardTest {
 		board.initialize();
 		System.out.println(board.showBoard());
 	}
-
-	// @Test
-	// public void countPieceByColorAndType() throws Exception {
-	// board.initialize();
-	//
-	// assertEquals(8, board.countPieceByColorAndType(Color.WHITE, Type.PAWN));
-	// assertEquals(2, board.countPieceByColorAndType(Color.BLACK, Type.KNIGHT));
-	// assertEquals(1, board.countPieceByColorAndType(Color.BLACK, Type.KING));
-	// }
 
 	@Test
 	public void findPiece() throws Exception {
@@ -84,19 +79,29 @@ public class BoardTest {
 
 		System.out.println(board.showBoard());
 	}
+	
+
+	@Test
+	public void countPieceByColorAndTypeTest() throws Exception {
+		board.initialize();
+
+		assertEquals(8, board.countPieceByColorAndType(Color.WHITE, Type.PAWN));
+		assertEquals(2, board.countPieceByColorAndType(Color.BLACK, Type.KNIGHT));
+		assertEquals(2, board.countPieceByColorAndType(Color.WHITE, Type.KNIGHT));
+		assertEquals(1, board.countPieceByColorAndType(Color.BLACK, Type.QUEEN));
+		assertEquals(1, board.countPieceByColorAndType(Color.WHITE, Type.KING));
+	}
 
 	private void addPiece(String position, Piece piece) {
 		board.move(position, piece);
 	}
+	
+	@Test
+	public void sortByPointOfColorTest() throws Exception {
+		board.initialize();
+		System.out.println("정렬");
+		board.sortByPointOfColor(Color.WHITE);
+		
+	}
 
-	// @Test
-	// public void create() throws Exception {
-	// board.initialize();
-	// assertEquals(8, board.pieceCount(Color.BLACK, Type.PAWN));
-	// String blankRank = appendNewLine("........");
-	// assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") +
-	// blankRank + blankRank + blankRank
-	// + blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"),
-	// board.showBoard());
-	// }
 }

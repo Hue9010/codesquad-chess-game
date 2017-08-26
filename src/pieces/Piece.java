@@ -3,7 +3,7 @@ package pieces;
 
 import java.util.List;
 
-public class Piece {
+public class Piece implements Comparable<Piece> {
 
 	public enum Color {
 		WHITE, BLACK, NOCOLOR;
@@ -137,6 +137,16 @@ public class Piece {
 		return color == Color.WHITE ? type.getWhiteRepresentation() : type.getBlackRepresentation();
 	}
 
+	public void addPiecesByColor(Color color, List<Piece> piecesByColor) {
+		if (this.color == color) {
+			piecesByColor.add(this);
+		}
+	}
+
+	public boolean checkColorType(Color color, Type type) {
+		return this.color == color && this.type == type;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -168,10 +178,10 @@ public class Piece {
 		return true;
 	}
 
-	public void addPiecesByColor(Color color, List<Piece> piecesByColor) {
-		if (this.color == color) {
-			piecesByColor.add(this);
-		}
+	@Override
+	public int compareTo(Piece piece) {
+//		return (int) (type.getPoint() * 2 - piece.type.getPoint() * 2);
+		return (int) (piece.type.getPoint() * 2 - type.getPoint() * 2);
 	}
 
 }
