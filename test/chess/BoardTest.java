@@ -74,7 +74,12 @@ public class BoardTest {
 		assertEquals(Piece.createWhitePawn(new Position(targetPosition)), board.findPiece(targetPosition));
 		System.out.println("이동");
 		System.out.println(board.showBoard());
-
+	}
+	
+	@Test
+	public void createBlankBoardTest() throws Exception {
+		board.initializeEmpty();
+		System.out.println(board.showBoard());
 	}
 
 }
