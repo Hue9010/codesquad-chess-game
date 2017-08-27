@@ -7,11 +7,17 @@ public class Piece implements Comparable<Piece> {
 
 	public enum Color {
 		WHITE, BLACK, NOCOLOR;
+		String s;
 	}
 
 	public enum Type {
-		PAWN('p', 1.0), ROOK('r', 5.0), KNIGHT('n', 2.5), BISHOP('b', 3.0), QUEEN('q', 9.0), KING('k',
-				0.0), NO_PIECE('.', 0.0);
+		PAWN('p', 1.0), 
+		ROOK('r', 5.0), 
+		KNIGHT('n', 2.5), 
+		BISHOP('b', 3.0), 
+		QUEEN('q', 9.0), 
+		KING('k',0.0), 
+		NO_PIECE('.', 0.0);
 
 		private char representation;
 		private double point;
@@ -48,7 +54,6 @@ public class Piece implements Comparable<Piece> {
 		if (this.type != Type.PAWN) {
 			return type.getPoint();
 		}
-		System.out.println();
 		for (Position pos : this.position.SameYPosition()) {
 			if (pieces.contains(new Piece(this.color, this.type, pos))) {
 				return type.getPoint() - 0.5;
@@ -143,6 +148,10 @@ public class Piece implements Comparable<Piece> {
 		}
 	}
 
+	public void move(Position position) {
+		this.position = position;
+	}
+	
 	public boolean checkColorType(Color color, Type type) {
 		return this.color == color && this.type == type;
 	}

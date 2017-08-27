@@ -36,9 +36,9 @@ public class Position {
 
 	public List<Position> SameYPosition() {
 		List<Position> positions = new ArrayList<>();
-		for (int yPos = 1; yPos <= RANKSIZE; yPos++) {
-			if (yPos != getY()) {
-				positions.add(new Position(getXIndex(), yPos - 1));
+		for (int yIndex = 0; yIndex <= RANKSIZE; yIndex++) {
+			if (yIndex != getYIndex()) {
+				positions.add(new Position(getXIndex(), yIndex));
 			}
 		}
 		return positions;

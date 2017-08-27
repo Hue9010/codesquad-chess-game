@@ -56,9 +56,6 @@ public class Board {
 
 	public String showBoard() {
 		StringBuilder sb = new StringBuilder();
-		// for (Rank rank : ranks) {
-		// sb.append(appendNewLine(getPieceResult(rank)));
-		// }
 		for (int i = ranks.size() - 1; i >= 0; i--) {
 			sb.append(appendNewLine(getPieceResult(ranks.get(i))));
 		}
@@ -70,9 +67,16 @@ public class Board {
 		return ranks.get(p.getYIndex()).findPiece(p.getXIndex());
 	}
 
-	public void move(String position, Piece piece) {
-		Position p = new Position(position);
-		ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
+	public void move(String sourcePosition, String targetPosition) {
+		Position sourceP = new Position(sourcePosition);
+		Position targetP = new Position(targetPosition);
+		Piece movePiece = findPiece(sourcePosition);
+
+		ranks.get(targetP.getYIndex()).move(targetP.getXIndex(), movePiece);
+		ranks.get(sourceP.getYIndex()).move(sourceP.getXIndex(), Piece.createBlank(sourceP));
+		movePiece.move(targetP);
+//		ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
+//		Piece.createBlank(new Position(x, index))
 	}
 
 	public double caculcatePoint(Color color) {
@@ -85,7 +89,7 @@ public class Board {
 	}
 
 	private List<Piece> findPieceByColor(Color color) {
-		ArrayList<Piece> pieces = new ArrayList<>();
+		List<Piece> pieces = new ArrayList<>();
 		for (Rank rank : ranks) {
 			pieces.addAll(rank.findPieceByColor(color));
 		}
@@ -106,7 +110,7 @@ public class Board {
 		for (Piece piece : pieces) {
 			System.out.print(" " + piece.getRepresentation());
 		}
-		return null;
+		return pieces;
 	}
 
 }
