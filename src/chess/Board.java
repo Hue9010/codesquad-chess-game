@@ -17,19 +17,19 @@ public class Board {
 	public void initializeEmpty() {
 
 		for (int i = 0; i < 8; i++) {
-			ranks.add(Rank.initializeBlank(i));
+			ranks.add(Rank.initializePieces(i, new BlankPiecesStrategy()));
 		}
 	}
 
 	public void initialize() {
-		ranks.add(Rank.initializeWhitePieces(0));
-		ranks.add(Rank.initializeWhitePawns(1));
-		ranks.add(Rank.initializeBlank(2));
-		ranks.add(Rank.initializeBlank(3));
-		ranks.add(Rank.initializeBlank(4));
-		ranks.add(Rank.initializeBlank(5));
-		ranks.add(Rank.initializeBlackPawns(6));
-		ranks.add(Rank.initializeBlackPieces(7));
+		ranks.add(Rank.initializePieces(0, new WhitePiecesStrategy()));
+		ranks.add(Rank.initializePieces(1, new WhitePawnPiecesStrategy()));
+		ranks.add(Rank.initializePieces(2, new BlankPiecesStrategy()));
+		ranks.add(Rank.initializePieces(3, new BlankPiecesStrategy()));
+		ranks.add(Rank.initializePieces(4, new BlankPiecesStrategy()));
+		ranks.add(Rank.initializePieces(5, new BlankPiecesStrategy()));
+		ranks.add(Rank.initializePieces(6, new BlackPawnPiecesStrategy()));
+		ranks.add(Rank.initializePieces(7, new BlackPiecesStrategy()));
 	}
 
 	private String getPieceResult(Rank rank) {
@@ -96,5 +96,4 @@ public class Board {
 		}
 		return pieces;
 	}
-
 }
