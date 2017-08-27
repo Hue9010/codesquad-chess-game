@@ -44,39 +44,6 @@ public class BoardTest {
 		assertEquals(Piece.createWhiteRook(new Position("h1")), board.findPiece("h1"));
 	}
 
-//	@Test
-//	public void move() throws Exception {
-//		board.initializeEmpty();
-//
-//		String position = "b5";
-//		Piece piece = Piece.createBlackRook(new Position(position));
-//		board.move(position, piece);
-//
-//		assertEquals(piece, board.findPiece(position));
-//		System.out.println(board.showBoard());
-//	}
-
-//	@Test
-//	public void caculcatePoint() throws Exception {
-//		board.initializeEmpty();
-//
-//		addPiece("b6", Piece.createBlackPawn(new Position("b6")));
-//		addPiece("e6", Piece.createBlackQueen(new Position("e6")));
-//		addPiece("b8", Piece.createBlackKing(new Position("b8")));
-//		addPiece("c8", Piece.createBlackRook(new Position("c8")));
-//
-//		addPiece("f2", Piece.createWhitePawn(new Position("f2")));
-//		addPiece("f3", Piece.createWhitePawn(new Position("f3")));
-//		addPiece("f4", Piece.createWhitePawn(new Position("f4")));
-//		addPiece("e1", Piece.createWhiteRook(new Position("e1")));
-//		addPiece("f1", Piece.createWhiteKing(new Position("f1")));
-//
-//		assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
-//		assertEquals(6.5, board.caculcatePoint(Color.WHITE), 0.01);
-//
-//		System.out.println(board.showBoard());
-//	}
-
 	@Test
 	public void countPieceByColorAndTypeTest() throws Exception {
 		board.initialize();
@@ -87,10 +54,6 @@ public class BoardTest {
 		assertEquals(1, board.countPieceByColorAndType(Color.BLACK, Type.QUEEN));
 		assertEquals(1, board.countPieceByColorAndType(Color.WHITE, Type.KING));
 	}
-
-//	private void addPiece(String position, Piece piece) {
-//		board.move(position, piece);
-//	}
 
 	@Test
 	public void sortByPointOfColorTest() throws Exception {

@@ -16,15 +16,9 @@ public class Board {
 
 	public void initializeEmpty() {
 
-		ranks.add(Rank.initializeBlank(0));
-		ranks.add(Rank.initializeBlank(1));
-		ranks.add(Rank.initializeBlank(2));
-		ranks.add(Rank.initializeBlank(3));
-		ranks.add(Rank.initializeBlank(4));
-		ranks.add(Rank.initializeBlank(5));
-		ranks.add(Rank.initializeBlank(6));
-		ranks.add(Rank.initializeBlank(7));
-
+		for (int i = 0; i < 8; i++) {
+			ranks.add(Rank.initializeBlank(i));
+		}
 	}
 
 	public void initialize() {
@@ -44,14 +38,6 @@ public class Board {
 			sb.append(piece.getRepresentation());
 		}
 		return sb.toString();
-	}
-
-	public int pieceCount(Color color, Type type) {
-		int count = 0;
-		for (Rank rank : ranks) {
-			count += rank.pieceCount(color, type);
-		}
-		return count;
 	}
 
 	public String showBoard() {
@@ -75,8 +61,6 @@ public class Board {
 		ranks.get(targetP.getYIndex()).move(targetP.getXIndex(), movePiece);
 		ranks.get(sourceP.getYIndex()).move(sourceP.getXIndex(), Piece.createBlank(sourceP));
 		movePiece.move(targetP);
-//		ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
-//		Piece.createBlank(new Position(x, index))
 	}
 
 	public double caculcatePoint(Color color) {

@@ -70,16 +70,6 @@ public class Rank {
 		return rank;
 	}
 
-	public int pieceCount(Color color, Type type) {
-		int count = 0;
-		for (Piece piece : pieces) {
-			if (piece.getColor() == color && piece.getType() == type) {
-				count++;
-			}
-		}
-		return count;
-	}
-
 	public Piece findPiece(int xPos) {
 		return pieces.get(xPos);
 	}
@@ -99,11 +89,16 @@ public class Rank {
 	public int countPieceByColorAndType(Color color, Type type) {
 		int countOfPiece = 0;
 		for (Piece piece : pieces) {
-			if (piece.checkColorType(color, type)) {
-				countOfPiece++;
-			}
+			countOfPiece += checkColorType(piece, color, type);
 		}
 		return countOfPiece;
+	}
+
+	private int checkColorType(Piece piece, Color color, Type type) {
+		if (piece.checkColorType(color, type)) {
+			return 1;
+		}
+		return 0;
 	}
 
 }

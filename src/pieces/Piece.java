@@ -11,13 +11,8 @@ public class Piece implements Comparable<Piece> {
 	}
 
 	public enum Type {
-		PAWN('p', 1.0), 
-		ROOK('r', 5.0), 
-		KNIGHT('n', 2.5), 
-		BISHOP('b', 3.0), 
-		QUEEN('q', 9.0), 
-		KING('k',0.0), 
-		NO_PIECE('.', 0.0);
+		PAWN('p', 1.0), ROOK('r', 5.0), KNIGHT('n', 2.5), BISHOP('b', 3.0), QUEEN('q', 9.0), KING('k',
+				0.0), NO_PIECE('.', 0.0);
 
 		private char representation;
 		private double point;
@@ -123,11 +118,15 @@ public class Piece implements Comparable<Piece> {
 	}
 
 	public boolean isWhite() {
-		return color == Color.WHITE;
+		return checkColor(Color.WHITE);
 	}
 
 	public boolean isBlack() {
-		return color == Color.BLACK;
+		return checkColor(Color.BLACK);
+	}
+
+	private boolean checkColor(Color color) {
+		return this.color == color;
 	}
 
 	public Type getType() {
@@ -139,11 +138,11 @@ public class Piece implements Comparable<Piece> {
 	}
 
 	public char getRepresentation() {
-		return color == Color.WHITE ? type.getWhiteRepresentation() : type.getBlackRepresentation();
+		return checkColor(Color.WHITE) ? type.getWhiteRepresentation() : type.getBlackRepresentation();
 	}
 
 	public void addPiecesByColor(Color color, List<Piece> piecesByColor) {
-		if (this.color == color) {
+		if (checkColor(color)) {
 			piecesByColor.add(this);
 		}
 	}
@@ -151,7 +150,7 @@ public class Piece implements Comparable<Piece> {
 	public void move(Position position) {
 		this.position = position;
 	}
-	
+
 	public boolean checkColorType(Color color, Type type) {
 		return this.color == color && this.type == type;
 	}
@@ -189,7 +188,8 @@ public class Piece implements Comparable<Piece> {
 
 	@Override
 	public int compareTo(Piece piece) {
-//		return (int) (type.getPoint() * 2 - piece.type.getPoint() * 2);
+		// return (int) (type.getPoint() * 2 - piece.type.getPoint() * 2); //오름 차순으로
+		// 정렬하고 싶다면 주석 해제
 		return (int) (piece.type.getPoint() * 2 - type.getPoint() * 2);
 	}
 
