@@ -6,11 +6,11 @@ import java.util.List;
 import pieces.Piece;
 import pieces.Position;
 
-public class WhitePiecesMakePiecesStrategy implements MakePiecesStrategy {
+public class WhitePiecesStrategy implements PiecesStrategy {
 	List<Piece> pieces = new ArrayList<Piece>();
 
 	@Override
-	public List<Piece> makePieces(int index) {
+	public List<Piece> create(int index) {
 		pieces.add(Piece.createWhiteRook(new Position(0, index)));
 		pieces.add(Piece.createWhiteKnight(new Position(1, index)));
 		pieces.add(Piece.createWhiteBishop(new Position(2, index)));

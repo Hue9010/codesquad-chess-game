@@ -11,15 +11,15 @@ import pieces.Position;
 public class Rank {
 
 	private List<Piece> pieces = new ArrayList<Piece>();
-	MakePiecesStrategy makePiecesStrategy;
+	PiecesStrategy makePiecesStrategy;
 
 	public List<Piece> getPieces() {
 		return pieces;
 	}
 
-	public static Rank initializePieces(int index, MakePiecesStrategy makePiecesStrategy) {
+	public static Rank initializePieces(int index, PiecesStrategy piecesStrategy) {
 		Rank rank = new Rank();
-		rank.pieces = makePiecesStrategy.makePieces(index);
+		rank.pieces = piecesStrategy.create(index);
 		return rank;
 	}
 
