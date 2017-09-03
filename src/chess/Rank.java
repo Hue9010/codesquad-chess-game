@@ -5,53 +5,76 @@ import java.util.List;
 
 import pieces.Piece;
 import pieces.Piece.Color;
-import pieces.Piece.Type;
-import pieces.Position;
+import utils.StringUtils;
 
 public class Rank {
+	List<Piece> pieces = new ArrayList<>();
 
-	private List<Piece> pieces = new ArrayList<Piece>();
-	PiecesStrategy makePiecesStrategy;
-
-	public List<Piece> getPieces() {
-		return pieces;
+	private void addPiece(Piece piece) {
+		pieces.add(piece);
+	}
+	
+	public Piece getPiece(int index) {
+		return pieces.get(index);
 	}
 
-	public static Rank initializePieces(int index, PiecesStrategy piecesStrategy) {
+	public static Rank createWhitePawn() {
 		Rank rank = new Rank();
-		rank.pieces = piecesStrategy.create(index);
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Piece.createWhitePawn());
+		}
 		return rank;
 	}
 
-	public Piece findPiece(int xPos) {
-		return pieces.get(xPos);
+	public static Rank createBlackPawn() {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Piece.createBlackPawn());
+		}
+		return rank;
 	}
 
-	public void move(int xPos, Piece piece) {
-		pieces.set(xPos, piece);
+	public static Rank createBlackPieces() {
+		Rank rank = new Rank();
+		rank.addPiece(Piece.createRook(Color.BLACK));
+		rank.addPiece(Piece.createKnight(Color.BLACK));
+		rank.addPiece(Piece.createBishop(Color.BLACK));
+		rank.addPiece(Piece.createQueen(Color.BLACK));
+		rank.addPiece(Piece.createKing(Color.BLACK));
+		rank.addPiece(Piece.createBishop(Color.BLACK));
+		rank.addPiece(Piece.createKnight(Color.BLACK));
+		rank.addPiece(Piece.createRook(Color.BLACK));
+		return rank;
+
 	}
 
-	public List<Piece> findPieceByColor(Color color) {
-		List<Piece> piecesByColor = new ArrayList<>();
+	public static Rank createWhitePieces() {
+		Rank rank = new Rank();
+		rank.addPiece(Piece.createRook(Color.WHITE));
+		rank.addPiece(Piece.createKnight(Color.WHITE));
+		rank.addPiece(Piece.createBishop(Color.WHITE));
+		rank.addPiece(Piece.createQueen(Color.WHITE));
+		rank.addPiece(Piece.createKing(Color.WHITE));
+		rank.addPiece(Piece.createBishop(Color.WHITE));
+		rank.addPiece(Piece.createKnight(Color.WHITE));
+		rank.addPiece(Piece.createRook(Color.WHITE));
+		return rank;
+	}
+
+	public static Rank createBlank() {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			rank.addPiece(Piece.createBlank());
+		}
+		return rank;
+	}
+
+	public String show() {
+		StringBuilder sb = new StringBuilder();
 		for (Piece piece : pieces) {
-			piece.addPiecesByColor(color, piecesByColor);
+			sb.append(piece.getRerepresentation());
 		}
-		return piecesByColor;
-	}
-
-	public int countPieceByColorAndType(Color color, Type type) {
-		int countOfPiece = 0;
-		for (Piece piece : pieces) {
-			countOfPiece += checkColorType(piece, color, type);
-		}
-		return countOfPiece;
-	}
-
-	private int checkColorType(Piece piece, Color color, Type type) {
-		if (piece.checkColorType(color, type)) {
-			return 1;
-		}
-		return 0;
+		return sb.append(StringUtils.NEWLINE).toString();
 	}
 
 }
