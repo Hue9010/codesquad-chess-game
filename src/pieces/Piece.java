@@ -52,6 +52,28 @@ public class Piece implements Comparable<Piece> {
 			}
 			return false;
 		}
+		if(type.getWhiteRepresentation() == 'q') {
+			if(moveQueen(targetPosition)) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	private boolean moveQueen(Position targetPosition) {
+		int targetX = targetPosition.getX();
+		int targetY = targetPosition.getY();
+		int thisX = position.getX();
+		int thisY = position.getY();
+		if (targetPosition.equals(position)) {
+			return false;
+		}
+		if(targetX - thisX == 0) {
+			if(targetY > thisY) {
+				
+			}
+		}
 		return false;
 	}
 
