@@ -9,20 +9,6 @@ import pieces.Piece.Type;
 
 public class PieceTest {
 	
-//	@Test
-//    public void create_piece() {
-//        verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Type.PAWN);
-//        verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Type.KNIGHT);
-//        verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Type.ROOK);
-//        verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Type.BISHOP);
-//        verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Type.QUEEN);
-//        verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Type.KING);
-//
-//        Piece blank = Piece.createBlank();
-//        assertFalse(blank.isWhite());
-//        assertFalse(blank.isBlack());
-//        assertEquals(Type.NO_PIECE, blank.getType());
-//    }
 
     private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Type type) {
         assertTrue(whitePiece.isWhite());
@@ -38,30 +24,25 @@ public class PieceTest {
 		assertEquals('P', Piece.Type.PAWN.getBlackRepresentation());
 	}
 
+	
+//해당 메소드를 public으로 하였을땐 정상 작
 //	@Test
-//	public void create_piece_one() {
-//		verifyPiece(Piece.createWhitePawn(), Color.WHITE, Type.PAWN.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackPawn(), Color.BLACK, Type.PAWN.getBlackRepresentation());
+//	public void moveKing() throws Exception {
+//		Piece king = Piece.createBlackKing(new Position("e8"));
+//		assertEquals(true, king.moveKing(new Position("d8")));
+//		assertEquals(true, king.moveKing(new Position("f8")));
+//		assertEquals(true, king.moveKing(new Position("e7")));
+//		assertEquals(true, king.moveKing(new Position("d7")));
+//		assertEquals(true, king.moveKing(new Position("f7")));
+//		assertEquals(false, king.moveKing(new Position("e9")));
+//		assertEquals(false, king.moveKing(new Position("d9")));
+//		assertEquals(false, king.moveKing(new Position("f9")));
+//		assertEquals(false, king.moveKing(new Position("e8")));
 //
-//		verifyPiece(Piece.createWhiteKnight(), Color.WHITE, Type.KNIGHT.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackKnight(), Color.BLACK, Type.KNIGHT.getBlackRepresentation());
-//
-//		verifyPiece(Piece.createWhiteRook(), Color.WHITE, Type.ROOK.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackRook(), Color.BLACK, Type.ROOK.getBlackRepresentation());
-//
-//		verifyPiece(Piece.createWhiteBishop(), Color.WHITE, Type.BISHOP.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackBishop(), Color.BLACK, Type.BISHOP.getBlackRepresentation());
-//
-//		verifyPiece(Piece.createWhiteQueen(), Color.WHITE, Type.QUEEN.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackQueen(), Color.BLACK, Type.QUEEN.getBlackRepresentation());
-//
-//		verifyPiece(Piece.createWhiteKing(), Color.WHITE, Type.KING.getWhiteRepresentation());
-//		verifyPiece(Piece.createBlackKing(), Color.BLACK, Type.KING.getBlackRepresentation());
-//
+//		assertEquals(false, king.moveKing(new Position("d6")));
+//		assertEquals(false, king.moveKing(new Position("f3")));
+//		assertEquals(false, king.moveKing(new Position("a1")));
+//		assertEquals(false, king.moveKing(new Position("c7")));
 //	}
-//
-//	private void verifyPiece(final Piece piece, Color color, final char representation) {
-//		assertEquals(color, piece.getColor());
-//		assertEquals(representation, piece.getRepresentation());
-//	}
+	
 }

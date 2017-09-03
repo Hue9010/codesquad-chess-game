@@ -12,16 +12,17 @@ import pieces.Position;
 import static utils.StringUtils.*;
 
 public class Board {
-	private List<Rank> ranks = new ArrayList<Rank>();
+	private List<Rank> ranks;
 
 	public void initializeEmpty() {
-
+		ranks = new ArrayList<Rank>();
 		for (int i = 0; i < 8; i++) {
 			ranks.add(Rank.initializePieces(i, new BlankPiecesStrategy()));
 		}
 	}
 
 	public void initialize() {
+		ranks = new ArrayList<Rank>();
 		ranks.add(Rank.initializePieces(0, new WhitePiecesStrategy()));
 		ranks.add(Rank.initializePieces(1, new WhitePawnPiecesStrategy()));
 		ranks.add(Rank.initializePieces(2, new BlankPiecesStrategy()));
@@ -58,9 +59,10 @@ public class Board {
 		Position targetP = new Position(targetPosition);
 		Piece movePiece = findPiece(sourcePosition);
 
-		ranks.get(targetP.getYIndex()).move(targetP.getXIndex(), movePiece);
-		ranks.get(sourceP.getYIndex()).move(sourceP.getXIndex(), Piece.createBlank(sourceP));
-		movePiece.move(targetP);
+		if (movePiece.move(targetP)) {
+			ranks.get(targetP.getYIndex()).move(targetP.getXIndex(), movePiece);
+			ranks.get(sourceP.getYIndex()).move(sourceP.getXIndex(), Piece.createBlank(sourceP));
+		}
 	}
 
 	public double caculcatePoint(Color color) {

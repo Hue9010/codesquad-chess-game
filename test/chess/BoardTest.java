@@ -67,19 +67,47 @@ public class BoardTest {
 	public void moveTest() throws Exception {
 		board.initialize();
 
-		String sourcePosition = "b2";
-		String targetPosition = "b3";
+		String sourcePosition = "e1";
+		String targetPosition = "e2";
 		board.move(sourcePosition, targetPosition);
 		assertEquals(Piece.createBlank(new Position(sourcePosition)), board.findPiece(sourcePosition));
-		assertEquals(Piece.createWhitePawn(new Position(targetPosition)), board.findPiece(targetPosition));
+		assertEquals(Piece.createWhiteKing(new Position(targetPosition)), board.findPiece(targetPosition));
 		System.out.println("이동");
 		System.out.println(board.showBoard());
 	}
-	
+
 	@Test
 	public void createBlankBoardTest() throws Exception {
 		board.initializeEmpty();
 		System.out.println(board.showBoard());
 	}
+
+	@Test
+	public void moveKing() throws Exception {
+		board.initialize();
+		board.move("e8", "e7");
+		assertEquals(Piece.createBlackKing(new Position("e7")), board.findPiece("e7"));
+		board.initialize();
+		board.move("e8", "e9");
+		assertEquals(Piece.createBlackKing(new Position("e8")), board.findPiece("e8"));
+		board.initialize();
+		board.move("e8", "f7");//e8 /e9/d9/f9, d8f8, /d7 /e7 /f7
+		assertEquals(Piece.createBlackKing(new Position("f7")), board.findPiece("f7"));
+		board.initialize();
+		board.move("e8", "d7");
+		assertEquals(Piece.createBlackKing(new Position("d7")), board.findPiece("d7"));
+		board.initialize();
+		board.move("e8", "d9");
+		assertEquals(Piece.createBlackKing(new Position("e8")), board.findPiece("e8"));
+		board.initialize();
+		board.move("e8", "f9");
+		assertEquals(Piece.createBlackKing(new Position("e8")), board.findPiece("e8"));
+		board.initialize();
+		board.move("e8", "d8");
+		assertEquals(Piece.createBlackKing(new Position("e8")), board.findPiece("e8"));
+		board.initialize();
+		board.move("e8", "f8");
+		assertEquals(Piece.createBlackKing(new Position("e8")), board.findPiece("e8"));
+}
 
 }

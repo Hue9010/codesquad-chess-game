@@ -45,6 +45,40 @@ public class Piece implements Comparable<Piece> {
 		this.position = position;
 	}
 
+	public boolean move(Position targetPosition) {
+		if (type.getWhiteRepresentation() == 'k') {
+			if (moveKing(targetPosition)) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
+	private boolean moveKing(Position targetPosition) {
+		int targetX = targetPosition.getX();
+		int targetY = targetPosition.getY();
+		int thisX = position.getX();
+		int thisY = position.getY();
+		if (targetPosition.equals(position)) {
+			return false;
+		}
+		if (targetX > 7 || targetX < 1) {
+			return false;
+		}
+		if (targetY > 7 || targetY < 1) {
+			return false;
+		}
+		if (Math.abs((thisY - targetY)) > 1) {
+			return false;
+		}
+		if (Math.abs((thisX - targetX)) > 1) {
+			return false;
+		}
+		this.position = targetPosition;
+		return true;
+	}
+
 	public double getPoint(List<Piece> pieces) {
 		if (this.type != Type.PAWN) {
 			return type.getPoint();
@@ -145,10 +179,6 @@ public class Piece implements Comparable<Piece> {
 		if (checkColor(color)) {
 			piecesByColor.add(this);
 		}
-	}
-
-	public void move(Position position) {
-		this.position = position;
 	}
 
 	public boolean checkColorType(Color color, Type type) {
